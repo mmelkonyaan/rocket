@@ -1,7 +1,7 @@
 <?php
 // Добавление поддержки изображений и размеров
 add_theme_support('post-thumbnails');
-add_image_size('promotion-thumbnail', 400, 300, true); 
+add_image_size('promotion-thumbnail', 300, 200, true); 
 add_image_size('article-thumbnail', 800, 600, true);
 
 // Подключение стилей и скриптов

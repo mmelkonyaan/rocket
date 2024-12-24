@@ -43,14 +43,14 @@
         <div class="title">Услуги</div>
 
         <!-- Карусель для мобильных -->
-        <div id="servicesCarousel" class="carousel slide d-lg-none" data-bs-ride="carousel">
+        <div id="servicesCarousel" class="carousel slide d-md-none" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <?php
-                $promotions = new WP_Query(array('post_type' => 'promotion', 'posts_per_page' => 4));
+                $promotions = new WP_Query(array('post_type' => 'promotion', 'posts_per_page' => -1)); // Показывать все
                 if ($promotions->have_posts()) :
-                    $active = true;
+                    $is_first = true; // Флаг для определения первого элемента
                     while ($promotions->have_posts()) : $promotions->the_post(); ?>
-                        <div class="carousel-item <?php echo $active ? 'active' : ''; ?>">
+                        <div class="carousel-item <?php echo $is_first ? 'active' : ''; ?>">
                             <div class="services-card">
                                 <div class="service-badges">
                                     <?php
@@ -67,47 +67,48 @@
                                 </div>
                                 <div class="services-card-img">
                                     <?php if (has_post_thumbnail()) : ?>
-                                        <?php the_post_thumbnail('promotion-thumbnail'); ?>
+                                        <?php the_post_thumbnail('promotion-thumbnail', array('class' => 'img-fluid')); ?>
                                     <?php else : ?>
-                                        <img src="path/to/default-image.jpg" alt="Default image">
+                                        <img src="path/to/default-image.jpg" alt="Default image" class="img-fluid">
                                     <?php endif; ?>
                                 </div>
                                 <div class="services-card-block">
                                     <div class="services-card-block-title">
                                         <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                     </div>
-                                    <div class="services-card-block-price"><?php the_excerpt(); ?></div>
+                                    <div class="services-card-block-price">
+                                        <?php the_excerpt(); ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <?php $active = false; ?>
+                        <?php $is_first = false; // После первого элемента переключаем флаг ?>
                     <?php endwhile;
                     wp_reset_postdata();
                 endif;
                 ?>
             </div>
 
+            <!-- Индикаторы карусели -->
             <div class="carousel-indicators">
                 <?php
                 $promotions_count = $promotions->post_count;
-                for ($i = 0; $i < $promotions_count; $i++) :
-                    ?>
+                for ($i = 0; $i < $promotions_count; $i++) : ?>
                     <button type="button" data-bs-target="#servicesCarousel" data-bs-slide-to="<?php echo $i; ?>" class="<?php echo $i === 0 ? 'active' : ''; ?>" aria-current="<?php echo $i === 0 ? 'true' : 'false'; ?>"></button>
                 <?php endfor; ?>
             </div>
         </div>
 
         <!-- Сетка для ПК -->
-        <div class="row d-none d-lg-flex">
+        <div class="row d-none d-md-flex gy-4">
             <?php
-            $promotions = new WP_Query(array('post_type' => 'promotion', 'posts_per_page' => 4));
+            $promotions = new WP_Query(array('post_type' => 'promotion', 'posts_per_page' => -1)); // Показывать все
             if ($promotions->have_posts()) :
                 while ($promotions->have_posts()) : $promotions->the_post(); ?>
                     <div class="services-card col-md-3">
                         <div class="service-badges">
                             <?php
-                            $terms = get_the_terms(get_the_ID(), 'promotion_tag'); 
-                            if ($terms && !is_wp_error($terms)) :
+                            $terms = get_the_terms(get_the_ID(), 'promotion_tag');if ($terms && !is_wp_error($terms)) :
                                 $badge_count = 0;
                                 foreach ($terms as $term) :
                                     $badge_class = $badge_count === 1 ? 'secondary' : ''; 
@@ -119,16 +120,18 @@
                         </div>
                         <div class="services-card-img">
                             <?php if (has_post_thumbnail()) : ?>
-                                <?php the_post_thumbnail('promotion-thumbnail'); ?>
+                                <?php the_post_thumbnail('promotion-thumbnail', array('class' => 'img-fluid')); ?>
                             <?php else : ?>
-                                <img src="path/to/default-image.jpg" alt="Default image">
+                                <img src="path/to/default-image.jpg" alt="Default image" class="img-fluid">
                             <?php endif; ?>
                         </div>
                         <div class="services-card-block">
                             <div class="services-card-block-title">
                                 <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                             </div>
-                            <div class="services-card-block-price"><?php the_excerpt(); ?></div>
+                            <div class="services-card-block-price">
+                                <?php the_excerpt(); ?>
+                            </div>
                         </div>
                     </div>
                 <?php endwhile;

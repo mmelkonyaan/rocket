@@ -44,19 +44,21 @@ section {
 
 .container{
     padding: 0;
-    width: 1201px;
+    width: 100%;
+    max-width: 1201px;
 }
 
 .row{
     margin-left: 0;
     margin-right: 0;
     padding: 0;
-    width: 1201px;
+    width: 100%;
     gap: 14px;
 }
 
 .d-none{
     gap: 20px;
+    padding-top: 46px;
 }
 
 .header-logo{
@@ -77,7 +79,7 @@ section {
     font-weight: 700;
     line-height: 110%;
     letter-spacing: -0.72px;
-    padding: 0px 0 46px 0;
+    padding-bottom: 46px;
 }
 
 
@@ -90,11 +92,15 @@ section {
 .articles-card{
     display: flex;
     width: 391px;
-    height: 365px;
+    min-height: 365px;
     flex-direction: column;
     align-items: center;
     border-radius: 1.685px;
     padding: 0;
+}
+
+.articles-card-img{
+    width: 100%;
 }
 
 .articles-card-img img{
@@ -145,6 +151,7 @@ section {
     border: 1px solid #D9D9D9;
     padding: 0;
     overflow: hidden;
+    margin: 0;
 }
 
 .services-card-img img {
@@ -247,6 +254,7 @@ footer{
     background-color: #E6E6E6;
     border: none; 
     padding: 0;
+    margin-bottom: 40px;
 }
 
 .carousel-indicators .active {
@@ -314,6 +322,66 @@ footer{
     margin-top: 20px;
 }
 
+@media (max-width: 1200px) {
+    .container{
+        width: 100%;
+        padding: 0px 60px;
+    }
+    .articles-card{
+        min-width: 312px;
+    }
+}
+
+@media (max-width: 1024px) {
+    footer .footer-logo {
+        text-align: center;
+        font-size: 12px;
+        padding: 48px 24px 0px 24px;
+    }
+    .container{
+        width: 100%;
+        padding: 0px 60px;
+    }
+    nav.main-menu .menu li{
+        margin: 0 10px;
+    }
+    .row{
+        width: 100%;
+    }
+    .title{
+        letter-spacing: -0.4px;
+        padding-bottom: 24px;
+    }
+    .header-logo{
+        font-size: 14px;
+    }
+    .d-none{
+        gap: 16px;
+    }
+    .articles, .services {
+        position: relative;
+        padding: 48px 0px;
+    }
+    .articles{
+        height: 100%;
+    }
+    .articles-card-img img{
+        height: 194px;
+    }
+    .articles-card{
+       align-items: flex-start;
+    }
+    .articles-card-block-title{
+        font-size: 16px;
+        letter-spacing: -0.32px;
+    }
+    .articles-card-block-text, .articles-card-block-date{
+        font-size: 12px;
+    }
+    .page-content {
+        font-size: 12px;
+    }
+}
 
 @media (max-width: 768px) {
     footer .footer-logo {
@@ -325,8 +393,13 @@ footer{
         width: 100%;
         padding: 0px 24px;
     }
+    nav.main-menu .menu li{
+        margin: 0 10px;
+        font-size: 14px;
+    }
     .row{
         width: 100%;
+        gap: 20px;
     }
     .title{
         font-size: 20px;
@@ -348,12 +421,20 @@ footer{
         height: 194px;
     }
     .articles-card{
-       width: auto;
        align-items: flex-start;
+       min-height: 348px;
+       width: 100%;
+       max-width: 391px;
     }
     .articles-card-block-title{
         font-size: 16px;
         letter-spacing: -0.32px;
+    }
+    .articles-card-block-text{
+        margin-top: 12px;
+    }
+    .articles-card-block-date{
+        margin-top: 24px;
     }
     .articles-card-block-text, .articles-card-block-date{
         font-size: 12px;
