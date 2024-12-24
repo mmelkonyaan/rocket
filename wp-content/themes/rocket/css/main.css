@@ -94,7 +94,7 @@ section {
     width: 391px;
     min-height: 365px;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     border-radius: 1.685px;
     padding: 0;
 }
